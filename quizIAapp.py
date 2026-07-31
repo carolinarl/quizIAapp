@@ -68,9 +68,13 @@ PREGUNTAS = [
 ]
 
 
-@st.cache_resource(show_spinner="IA transformer")
+@st.cache_resource(show_spinner="Cargando modelo de IA...")
 def cargar_modelo():
-    return pipeline("text2text-generation", model="google/flan-t5-small")
+    return pipeline(
+        "text2text-generation",
+        model="google/flan-t5-small",
+        device=-1
+    )
 
 
 def generar_evaluacion_ia(correctas, total, porcentaje, temas_fallados):
@@ -146,7 +150,7 @@ if enviado:
                 st.info(f"**Evaluación de la IA:** {evaluacion_ia}")
             except Exception as e:
                 st.warning(
-                    "Error"
+                    " "
                 )
 
         with st.expander("Ver detalle de respuestas"):
